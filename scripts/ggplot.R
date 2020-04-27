@@ -1,24 +1,35 @@
+#load package
 library(tidyverse)
+
+#Challenge 2
 gapminder <-read.csv("data/gapminder.csv")
+gapminder
 gapminder_1977 <- filter(gapminder, year == 1977)
+
+#a plot of gapminder)1977
+#basic structure: ggplot(<DATA>, <AESTHETIC MAPPING>) + <GEOMETRY FUNCTION>
 ggplot(
   data = gapminder_1977,
   mapping = aes(x = gdpPercap, y = lifeExp, colour = continent, size = pop)
 ) +
   geom_point() +
   scale_x_log10()
+
 #challenge 4_plotting different combinations
+# ggplot(gapminder_1977, aes(x = <VAR1>, y = <VAR2>, colour = <VAR3>)) + geom_point()
 ggplot(
   data = gapminder_1977,
   mapping = aes(x = country, y = lifeExp, colour = pop, size = gdpPercap)
 ) +
   geom_point()
+
 #
 ggplot(
   data = gapminder_1977,
   mapping = aes(x = country, y = lifeExp, colour = pop)
 ) +
   geom_point()
+
 #
 ggplot(
   data = gapminder_1977,
@@ -26,12 +37,16 @@ ggplot(
 ) +
   geom_point()
 
+# alternative method using pipe
 gapminder_1977 %>% 
   ggplot(mapping = aes(x = gdpPercap, y = lifeExp, colour = continent, size = pop)) +
   geom_point() +
   scale_x_log10()
-#challenge
+
+#challenge 5: aesthetics mapped to a geom
 ?geom_point()
+#x, y, alpha, colour, fill, group, shape, size, stroke
+
 #challenge 6
 gapminder_1977 %>% 
   ggplot(mapping = aes(x = gdpPercap, y = lifeExp, colour = continent, size = pop)) +
